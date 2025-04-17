@@ -1,1 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DisPredict - Disease Prediction App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('static/bgCover.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.25) !important;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo h5 {
+      color: white;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .myimg {
+      height: 50px;
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    .container-glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 80px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .title-symptoms {
+      color: #000000;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+   
+ 
+
+    .btn-custom {
+      background: #343a40;
+      color: white;
+      border-radius: 10px;
+      border: none;
+      transition: 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background: #23272b;
+    }
+
+    .result-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: 15px;
+      margin-top: 30px;
+      color: #0077ee;
+    }
+
+    .card .card-title {
+      color: #0077ee;
+      font-weight: 600;
+    }
+
+    .card .card-text, .card ul {
+      color: #000000dd;
+    }
+
+    .card ul {
+      padding-left: 1.2rem;
+    }
+
+    .glass-box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(35px);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding: 15px;
+      text-align: center;
+      color: rgb(0, 0, 0);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container-fluid d-flex align-items-center justify-content-between px-4">
+    <div class="d-flex align-items-center logo">
+      <img src="static/LOGO.png" alt="Logo" class="myimg">
+      <h5>DisPredict</h5>
+    </div>
+    <a class="btn btn-outline-light" href="/" id="resetButton">Reset</a>
+  </div>
+</nav>
+
+<!-- Main Form Section -->
+<div class="container container-glass">
+  <form action="/predict" method="post">
+    <div class="mb-3">
+      <label for="symptoms" class="title-symptoms">Enter your symptoms:</label>
+      <input type="text" class="form-control" id="symptoms" name="symptoms"
+             placeholder="e.g., headache, mild fever, body pain">
+    </div>
+
+    {% if message %}
+    <p class="text-warning">{{ message }}</p>
+    {% endif %}
+
+    <div class="d-flex justify-content-center mt-4">
+      <button type="submit" class="btn btn-custom px-5 py-2">Predict</button>
+    </div>
+  </form>
+</div>
+
+<!-- Result Section -->
+{% if predicted_disease %}
+<div class="container result-section">
+  <h4 class="text-center mb-4">🧐 Prediction Results</h4>
+  <div class="row g-4">
+
+    <!-- Disease Name -->
+    <div class="col-md-6">
+      <div class="card bg-transparent border-0 text-white shadow-sm">
+        <div class="card-body glass-box rounded">
+          <h5 class="card-title">Disease</h5>
+          <p class="card-text fs-5">{{ predicted_disease }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="col-md-6">
+      <div class="card bg-transparent border-0 text-white shadow-sm">
+        <div class="card-body glass-box rounded">
+          <h5 class="card-title">Description</h5>
+          <p class="card-text">{{ dis_des }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Precautions -->
+    <div class="col-md-6">
+      <div class="card bg-transparent border-0 text-white shadow-sm">
+        <div class="card-body glass-box rounded">
+          <h5 class="card-title">Precautions</h5>
+          <ul>
+            {% for i in my_precautions %}
+              <li>{{ i }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medications -->
+    <div class="col-md-6">
+      <div class="card bg-transparent border-0 text-white shadow-sm">
+        <div class="card-body glass-box rounded">
+          <h5 class="card-title">Medications</h5>
+          <ul>
+            {% for i in medications %}
+              <li>{{ i }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workout -->
+    <div class="col-md-6">
+      <div class="card bg-transparent border-0 text-white shadow-sm">
+        <div class="card-body glass-box rounded">
+          <h5 class="card-title">Workout</h5>
+          <ul>
+            {% for i in workout %}
+              <li>{{ i }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diet -->
+    <div class="col-md-6">
+      <div class="card bg-transparent border-0 text-white shadow-sm">
+        <div class="card-body glass-box rounded">
+          <h5 class="card-title">Diet</h5>
+          <ul>
+            {% for i in my_diet %}
+              <li>{{ i }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+<!-- Footer -->
+<div class="footer">
+  <small>Machine Learning Project by: Vishal, Suresh, Naveen & RajKumar</small>
+</div>
+
+</body>
+</html>
 
