@@ -9,10 +9,9 @@ Title: A Machine Learning Approach To Early Disease Detection and Medical Suppor
 ## Introduction
 The Disease Prediction and Medical Recommendation System leverages machine learning techniques to predict diseases based on user-entered symptoms. It provides recommendations for medications, diets, and workouts tailored to specific diseases. The project uses a dataset from Kaggle comprising symptoms, diseases, medications, and other medical attributes to train and evaluate machine learning models.
 
-## Project Overview
-The project files are organized into the following directories:
 
-### 1. kaggle_dataset
+
+### kaggle_dataset
 - `description.csv`: Descriptions of diseases.
 - `diets.csv`: Recommended diets for diseases.
 - `medications.csv`: Medications prescribed for diseases.
@@ -26,5 +25,4 @@ The project files are organized into the following directories:
 
 - `main.py`: Entry point for the Flask web application.
 - `disease_prediction_system.ipynb`: Jupyter Notebook with data preprocessing and model training.
-- `CS584_Project_Report.pdf`: Detailed report on methodologies, model evaluation, results, and future enhancements.
 - `index.html`: Front-end interface for the web application.
