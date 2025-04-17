@@ -21,3 +21,10 @@ The project files are organized into the following directories:
 - `symptoms_df.csv`: Symptoms with corresponding disease labels.
 - `Training.csv`: Dataset for training machine learning models.
 - `workout_df.csv`: Recommended workouts for diseases.
+
+## Project Files Overview
+
+- `main.py`: Entry point for the Flask web application.
+- `disease_prediction_system.ipynb`: Jupyter Notebook with data preprocessing and model training.
+- `CS584_Project_Report.pdf`: Detailed report on methodologies, model evaluation, results, and future enhancements.
+- `index.html`: Front-end interface for the web application.
