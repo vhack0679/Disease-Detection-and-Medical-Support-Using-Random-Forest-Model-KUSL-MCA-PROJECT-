@@ -1,0 +1,7 @@
+Flask
+pandas
+numpy
+fuzzywuzzy
+python-Levenshtein
+gunicorn
+scikit-learn
